@@ -55,7 +55,7 @@ test("verify Book a Meeting link", async ({ page }) => {
   await page1.waitForURL(/.*calendly.com/);
 
   // Verify that the new tab's URL contains 'calendly.com'
-  expect(page1.url()).toMatch(/.*calendly.com/);
+  await expect(page1.url()).toMatch(/.*calendly.com/);
 });
 
 test("verify get started link", async ({ page }) => {
@@ -67,7 +67,7 @@ test("verify get started link", async ({ page }) => {
   await page.waitForURL("https://klik.solutions/klik-solutions-chat-bot/");
 
   // Verify that the new tab's URL contains 'calendly.com'
-  expect(page.url()).toMatch(/.*klik-solutions-chat-bot/);
+  await expect(page.url()).toMatch(/.*klik-solutions-chat-bot/);
 });
 
 test("verify Managed IT Services, Cloud experts, Data analytics, Cybersecurity links on the homepage", async ({
@@ -112,23 +112,156 @@ test("verify Show more industries drop-down", async ({ page }) => {
   await homePage.verifyIndustriesVisibility();
 });
 
-test("verify Looking for support? link", async ({ page }) => {
+test("verify Looking for support?, Klik to support link", async ({ page }) => {
   const homePage = new HomePage(page);
 
   // Click on the "Klik to support" link and verify navigation
   await homePage.clickSupportLink();
 
   // Verify the URL
-  expect(page.url()).toMatch(/.*contact-us/);
+  await expect(page.url()).toMatch(/.*contact-us/);
 });
 
 // Services We Provide
-// test("verify // Services We Provide carts", async ({ page }) => {
+test("verify 'Services We Provide' cards show extra text when hovered", async ({ page }) => {
+  const homePage = new HomePage(page);
+
+  // Verify each card's hover effect reveals the extra text
+  await homePage.verifyHoverEffect(
+    homePage.managedITServicesCard,
+    homePage.managedITServicesText
+  );
+
+  await homePage.verifyHoverEffect(
+    homePage.cybersecurityCard,
+    homePage.cybersecurityText
+  );
+
+  await homePage.verifyHoverEffect(
+    homePage.cloudExpertsCard,
+    homePage.cloudExpertsText
+  );
+
+  await homePage.verifyHoverEffect(
+    homePage.dataAnalyticsCard,
+    homePage.dataAnalyticsText
+  );
+});
+test("Our clients feedback vodeo opens and close", async ({ page }) => {
+  const homePage = new HomePage(page);
+
+    while (!(await page.getByRole("button", { name: "Close" }).isVisible())) {
+      await page.getByRole("link", { name: "video 8" }).click();
+      await page.waitForTimeout(500); // Optional delay to prevent excessive looping
+    }
+
+    await expect(page.getByRole("button", { name: "Close" })).toBeVisible();
+
+  // await page.getByRole("link", { name: "video 8" }).click();
+  // await page.getByRole("link", { name: "video 8" }).click();
+
+  // await expect(page.getByRole('button', { name: 'Close' })).toBeVisible();
+
+});
+
+test("A part of Klik Holdings links", async ({ page }) => {
+  const homePage = new HomePage(page);
+
+  // Verify each link
+  await homePage.verifyPopupLink("1 4", /.*klik.solutions/);
+  await homePage.verifyPopupLink("2 5", /.*kliksoft.dev/);
+  await homePage.verifyPopupLink("3 6", /.*klikanalytics.co/);
+  await homePage.verifyPopupLink("5 1", /.*kliksolutions.com.ua/);
+  await homePage.verifyPopupLink("6 1", /.*klikdigital.co/);
+
+  // const page1Promise = page.waitForEvent("popup");
+  // await page.getByRole("link", { name: "1 4" }).click();
+  // const page1 = await page1Promise;
+  //   await expect(page1.url()).toMatch(/.*klik.solutions/);
+  // await expect(page.url()).toMatch(/.*/);
+  // await page1.close();
+
+  // const page2Promise = page.waitForEvent("popup");
+  // await page.getByRole("link", { name: "2 5" }).click();
+  // const page2 = await page2Promise;
+  // await expect(page2.url()).toMatch(/.*kliksoft.dev/);
+  // await page2.close();
+
+  // const page3Promise = page.waitForEvent("popup");
+  // await page.getByRole("link", { name: "3 6" }).click();
+  // const page3 = await page3Promise;
+  // await expect(page3.url()).toMatch(/.*klikanalytics.co/);
+  // await page3.close();
+
+  // const page4Promise = page.waitForEvent("popup");
+  // await page.getByRole("link", { name: "5 1" }).click();
+  // const page4 = await page4Promise;
+  // await expect(page4.url()).toMatch(/.*kliksolutions.com.ua/);
+  // await page4.close();
+
+  // const page5Promise = page.waitForEvent("popup");
+  // await page.getByRole("link", { name: "6 1" }).click();
+  // const page5 = await page5Promise;
+  // await expect(page5.url()).toMatch(/.*klikdigital.co/);
+  // await page5.close();
+});
+
+test("Learn more - How to choose the right Security and IT services", async ({
+  page,
+}) => {
+  const homePage = new HomePage(page);
+
+  await page
+    .locator("div")
+    .filter({ hasText: /^Learn more$/ })
+    .locator("a")
+    .click();
+  await expect(page.getByText("Hide")).toBeVisible();
+
+  await page.getByText("Hide").click();
+  await page.waitForTimeout(500); // Optional delay to prevent excessive looping
+  await expect(page.getByText("Read more")).toBeVisible();
+  await expect(page.getByText("Hide")).toBeHidden();
+
+});
+
+test.only("Subscribe to our monthly newsletter", async ({ page }) => {
+  const homePage = new HomePage(page);
+
+  await page.getByRole("link", { name: "video 8" }).click();
+
+  await expect(page.getByRole("button", { name: "Close" })).toBeVisible();
+
+  await page1.goto("https://www.youtube.com/watch?v=lwqoVz9BQK8&t=3s");
+
+  await page.getByText("Managed IT ServicesKlik").hover();
+  await expect(
+    page.getByText(
+      "Klik Solutions’ managed IT services optimize your business operations with tailored support, proactive monitoring, and minimal downtime, allowing you to focus on growth."
+    )
+  ).toBeVisible();
+
+  Verify the URL
+  expect(page.url()).toMatch(/.*contact-us/);
+});
+
+// test.only("Subscribe to our monthly newsletter", async ({ page }) => {
 //   const homePage = new HomePage(page);
 
-//   // Click on the "Klik to support" link and verify navigation
-//   await homePage.clickSupportLink();
+//   await page.getByRole("link", { name: "video 8" }).click();
+//   await page.getByRole("link", { name: "video 8" }).click();
 
-//   // Verify the URL
-//   expect(page.url()).toMatch(/.*contact-us/);
+//   await expect(page.getByRole("button", { name: "Close" })).toBeVisible();
+
+  // await page1.goto("https://www.youtube.com/watch?v=lwqoVz9BQK8&t=3s");
+
+  // await page.getByText("Managed IT ServicesKlik").hover();
+  // await expect(
+  //   page.getByText(
+  //     "Klik Solutions’ managed IT services optimize your business operations with tailored support, proactive monitoring, and minimal downtime, allowing you to focus on growth."
+  //   )
+  // ).toBeVisible();
+
+  // Verify the URL
+  // expect(page.url()).toMatch(/.*contact-us/);
 // });
