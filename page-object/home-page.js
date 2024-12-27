@@ -175,6 +175,27 @@ exports.HomePage = class HomePage {
     this.klikToSupportLink = page.getByRole("link", {
       name: "Klik to support",
     });
+
+    // Locators for the service cards and extra text Services We Provide
+    this.managedITServicesCard = page.getByText("Managed IT ServicesKlik");
+    this.managedITServicesText = page.getByText(
+      "Klik Solutions’ managed IT services optimize your business operations with tailored support, proactive monitoring, and minimal downtime, allowing you to focus on growth."
+    );
+
+    this.cybersecurityCard = page.getByText("CybersecurityKlik Solutions’");
+    this.cybersecurityText = page.getByText(
+      "Klik Solutions’ cybersecurity services protect your business from evolving threats with advanced technologies, tailored solutions, and comprehensive protection."
+    );
+
+    this.cloudExpertsCard = page.getByText("Cloud ExpertsKlik Solutions’");
+    this.cloudExpertsText = page.getByText(
+      "Klik Solutions’ cloud services provide scalable, flexible solutions for seamless migration, management, and optimization, ensuring secure and accessible data, enhancing collaboration, and improving efficiency to support your business’s growth"
+    );
+
+    this.dataAnalyticsCard = page.getByText("Data AnalyticsKlik Analytics");
+    this.dataAnalyticsText = page.getByText(
+      "Klik Analytics transforms your business with data, AI, and automation, providing tailored solutions for actionable insights, strategic decision-making, and optimized operations to give you a competitive edge."
+    );
   }
 
   // Methods
@@ -335,5 +356,20 @@ exports.HomePage = class HomePage {
   async clickSupportLink() {
     await this.klikToSupportLink.click();
     await this.page.waitForURL(/.*contact-us/); // Wait for the URL to match the expected pattern
+  }
+
+  // Method to verify hover effect for each service card
+  async verifyHoverEffect(card, extraText) {
+    await card.hover();
+    await expect(extraText).toBeVisible();
+  }
+
+  // Method to verify that clicking a link opens the correct URL in a new tab
+  async verifyPopupLink(linkName, expectedURL) {
+    const popupPromise = this.page.waitForEvent("popup");
+    await this.page.getByRole("link", { name: linkName }).click();
+    const popupPage = await popupPromise;
+    await expect(popupPage.url()).toMatch(expectedURL);
+    await popupPage.close();
   }
 };
