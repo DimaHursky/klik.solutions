@@ -7,7 +7,8 @@ test.use({
 });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("https://klik.solutions/");
+  // await page.goto("https://klik.solutions/");
+  await page.goto("https://staging.klik.solutions/");
 });
 
 test("menu drop-down modal", async ({ page }) => {
@@ -225,24 +226,48 @@ test("Learn more - How to choose the right Security and IT services", async ({
 
 });
 
-test.only("Subscribe to our monthly newsletter", async ({ page }) => {
+test("The vodeo REVIEWS Our clients feedback are opens", async ({
+  page,
+}) => {
   const homePage = new HomePage(page);
 
   await page.getByRole("link", { name: "video 8" }).click();
 
   await expect(page.getByRole("button", { name: "Close" })).toBeVisible();
+  await page.getByRole("button", { name: "Close" }).click();
+  await expect(page.getByRole("button", { name: "Close" })).toBeHidden();
+});
 
-  await page1.goto("https://www.youtube.com/watch?v=lwqoVz9BQK8&t=3s");
+test.only("Subscribe to our monthly newsletter", async ({ page }) => {
+  const homePage = new HomePage(page);
 
-  await page.getByText("Managed IT ServicesKlik").hover();
-  await expect(
-    page.getByText(
-      "Klik Solutions’ managed IT services optimize your business operations with tailored support, proactive monitoring, and minimal downtime, allowing you to focus on growth."
-    )
-  ).toBeVisible();
+  await page.getByText("F.A.Q.").click();
+  await page.waitForTimeout(500);
+  await page.getByPlaceholder("First name*").fill("Test");
+  await page.getByPlaceholder("First name*").fill("Test");
+  await page.getByPlaceholder("Last name*").fill("Test");
+  await page.getByPlaceholder("Business email*").fill("test@klikdigital.co");
+  await page.getByPlaceholder("Phone number*").fill("00000000");
+  await page.waitForTimeout(500); // Optional delay to prevent excessive looping
+  await page.getByLabel("I agree to the Terms and").check();
+  await page.waitForTimeout(500);
+  await page.getByRole("button", { name: "Subscribe" }).click();
 
-  Verify the URL
-  expect(page.url()).toMatch(/.*contact-us/);
+  await page.route("**/*", (route, request) => {
+    if (request.method() === "POST") {
+      console.log(`POST Request URL: ${request.url()}`);
+      console.log(`POST Request Method: ${request.method()}`);
+      console.log(`POST Request Headers: ${JSON.stringify(request.headers())}`);
+      request.postData()
+        ? console.log(`POST Request Body: ${request.postData()}`)
+        : console.log("No POST request body");
+    }
+    route.continue();
+  });
+  await page.waitForRequest(/.*collected-forms\/submit\/form/);
+  // await page.waitForRequest(
+    // "https://forms.hscollectedforms.net/collected-forms/submit/form"
+  // );
 });
 
 // test.only("Subscribe to our monthly newsletter", async ({ page }) => {
