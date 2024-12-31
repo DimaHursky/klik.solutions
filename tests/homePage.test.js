@@ -238,36 +238,93 @@ test("The vodeo REVIEWS Our clients feedback are opens", async ({
   await expect(page.getByRole("button", { name: "Close" })).toBeHidden();
 });
 
-test.only("Subscribe to our monthly newsletter", async ({ page }) => {
+test("Subscribe to monthly newsletter successfully", async ({ page }) => {
   const homePage = new HomePage(page);
 
   await page.getByText("F.A.Q.").click();
-  await page.waitForTimeout(500);
-  await page.getByPlaceholder("First name*").fill("Test");
-  await page.getByPlaceholder("First name*").fill("Test");
-  await page.getByPlaceholder("Last name*").fill("Test");
+  await page.waitForTimeout(1000); // Optional delay to prevent excessive looping
+
+  // Assertion to confirm the field is not empty
+  let currentValue = await page.getByPlaceholder("First name*").inputValue();
+
+  while (!currentValue) {
+    await page.getByPlaceholder("First name*").fill("Test");
+    currentValue = await page.getByPlaceholder("First name*").inputValue(); // Re-check the value
+  }
+
+  await expect(page.getByPlaceholder("First name*")).not.toBeEmpty();
+
+  let currentValuelastName = await page
+    .getByPlaceholder("Last name*")
+    .inputValue();
+
+  while (!currentValuelastName) {
+    await page.getByPlaceholder("Last name*").fill("Test");
+    currentValuelastName = await page
+      .getByPlaceholder("Last name*")
+      .inputValue(); // Re-check the value
+  }
+
+  await expect(page.getByPlaceholder("Last name*")).not.toBeEmpty();
+
   await page.getByPlaceholder("Business email*").fill("test@klikdigital.co");
   await page.getByPlaceholder("Phone number*").fill("00000000");
   await page.waitForTimeout(500); // Optional delay to prevent excessive looping
+
+  // Agree to terms
   await page.getByLabel("I agree to the Terms and").check();
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(1500); // Optional delay to prevent excessive looping
+  
+
+  // Submit the form
   await page.getByRole("button", { name: "Subscribe" }).click();
 
-  await page.route("**/*", (route, request) => {
-    if (request.method() === "POST") {
-      console.log(`POST Request URL: ${request.url()}`);
-      console.log(`POST Request Method: ${request.method()}`);
-      console.log(`POST Request Headers: ${JSON.stringify(request.headers())}`);
-      request.postData()
-        ? console.log(`POST Request Body: ${request.postData()}`)
-        : console.log("No POST request body");
-    }
-    route.continue();
-  });
-  await page.waitForRequest(/.*collected-forms\/submit\/form/);
-  // await page.waitForRequest(
-    // "https://forms.hscollectedforms.net/collected-forms/submit/form"
-  // );
+  // Wait for the request to be sent
+  await page.waitForRequest(
+    (request) =>
+      request.url() ===
+        "https://forms.hscollectedforms.net/collected-forms/submit/form" &&
+      request.method() === "POST"
+  );
+
+  // TODO: add a new task, to add the banner
+  // Confirm subscription success
+  // await expect(page.getByText("Thank you for subscribing!")).toBeVisible();
+});
+
+test.only("Frequently Asked Questions drobdowns works", async ({ page }) => {
+  const homePage = new HomePage(page);
+ 
+  await page.getByRole('heading', { name: 'What are managed security and' }).click();
+  await expect(await page.getByText('Managed security and IT services provide IT support for all kinds of tech-')).toBeVisible();
+  await page.getByRole('heading', { name: 'What are managed security and' }).click();
+  await expect(await page.getByText('Managed security and IT services provide IT support for all kinds of tech-')).toBeHidden();
+
+  await page.getByRole('heading', { name: 'What is meant by IT support? +' }).click();
+  await expect(await page.getByText('Comprehensive security and IT support includes a wide range of services')).toBeVisible();
+  await page.getByRole('heading', { name: 'What is meant by IT support? -' }).click();
+  await expect(await page.getByText('Comprehensive security and IT support includes a wide range of services')).toBeHidden();
+
+  await page.getByRole('heading', { name: 'Why do companies need managed' }).click();
+  await expect(await page.getByText('A successful support team')).toBeVisible();
+  await page.getByRole('heading', { name: 'Why do companies need managed' }).click();
+  await expect(await page.getByText('A successful support team')).toBeHidden();
+
+  await page.getByRole('heading', { name: 'What do our team members do? +' }).click();
+  await page.getByText('Our team of professionals').click();
+  await page.getByRole('heading', { name: 'What do our team members do? -' }).click();
+
+  await page.getByRole('heading', { name: 'How do these services help' }).click();
+  await page.getByText('An MSSP helps businesses with').click();
+  // await page.getByText("Managed IT ServicesKlik").hover();
+  // await expect(
+  //   page.getByText(
+  //     "Klik Solutions’ managed IT services optimize your business operations with tailored support, proactive monitoring, and minimal downtime, allowing you to focus on growth."
+  //   )
+  // ).toBeVisible();
+
+  // Verify the URL
+  // expect(page.url()).toMatch(/.*contact-us/);
 });
 
 // test.only("Subscribe to our monthly newsletter", async ({ page }) => {
