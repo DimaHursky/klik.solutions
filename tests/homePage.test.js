@@ -7,8 +7,8 @@ test.use({
 });
 
 test.beforeEach(async ({ page }) => {
-  // await page.goto("https://klik.solutions/");
-  await page.goto("https://staging.klik.solutions/");
+  await page.goto("https://klik.solutions/");
+  // await page.goto("https://staging.klik.solutions/");
 });
 
 test("menu drop-down modal", async ({ page }) => {
@@ -292,7 +292,7 @@ test("Subscribe to monthly newsletter successfully", async ({ page }) => {
   // await expect(page.getByText("Thank you for subscribing!")).toBeVisible();
 });
 
-test.only("Frequently Asked Questions drobdowns works", async ({ page }) => {
+test("Frequently Asked Questions drobdowns works", async ({ page }) => {
   const homePage = new HomePage(page);
  
   await page.getByRole('heading', { name: 'What are managed security and' }).click();
@@ -316,6 +316,69 @@ test.only("Frequently Asked Questions drobdowns works", async ({ page }) => {
 
   await page.getByRole('heading', { name: 'How do these services help' }).click();
   await page.getByText('An MSSP helps businesses with').click();
+});
+
+test.only("PARTNERSHIP & COLLABORATION links", async ({ page }) => {
+  const homePage = new HomePage(page);
+
+  // await page.getByLabel('1 of').click();
+
+  const page1Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'microsoftlogo' }).click();
+  const page1 = await page1Promise;
+  await expect(page1.url()).toMatch("https://www.microsoft.com/uk-ua/");
+  await page1.close();
+
+  const page2Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'molnii logo' }).click();
+  const page2 = await page2Promise;
+  await expect(page2.url()).toMatch("https://www.molnii.com/");
+  await page2.close();
+
+  const page3Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'ThreatDefence' }).click();
+  const page3 = await page3Promise;
+  await page3.waitForURL(/.*threatdefence.com/)
+  await expect(page3.url()).toMatch(/.*threatdefence.com/);
+  await page3.close();
+
+  const page4Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'jetstorlogo' }).click();
+  const page4 = await page4Promise;
+  await page4.waitForURL(/.*jetstor.com/)
+  await expect(page4.url()).toMatch(/.*jetstor.com/);
+  await page4.close();
+
+  // const page5Promise = page.waitForEvent('popup');
+  // await page.getByRole('link', { name: 'sophoslogo' }).click();
+  // const page5 = await page5Promise;
+  // await page5.waitForTimeout(500);
+  // await page5.waitForURL("https://www.sophos.com/en-us");
+  // await expect(await page5.url()).toMatch(/.*sophos.com/);
+  // await page5.close();
+
+  const page6Promise = page.waitForEvent('popup');
+  await page.getByRole('link', { name: 'Dell Technologies logo sm' }).click();
+  const page6 = await page6Promise;
+  await page5.waitForTimeout(5000);
+  // await page6.waitForURL(/.* dell.com/);
+  await expect(page6.url()).toMatch(/.* dell.com\uk-ua\lp/);
+  await page6.close();
+
+  // await page.getByLabel('2 of').click();
+  // await page.getByLabel('3 of').click();
+});
+
+// test.only("Subscribe to our monthly newsletter", async ({ page }) => {
+//   const homePage = new HomePage(page);
+
+//   await page.getByRole("link", { name: "video 8" }).click();
+//   await page.getByRole("link", { name: "video 8" }).click();
+
+//   await expect(page.getByRole("button", { name: "Close" })).toBeVisible();
+
+  // await page1.goto("https://www.youtube.com/watch?v=lwqoVz9BQK8&t=3s");
+
   // await page.getByText("Managed IT ServicesKlik").hover();
   // await expect(
   //   page.getByText(
@@ -325,7 +388,7 @@ test.only("Frequently Asked Questions drobdowns works", async ({ page }) => {
 
   // Verify the URL
   // expect(page.url()).toMatch(/.*contact-us/);
-});
+// });
 
 // test.only("Subscribe to our monthly newsletter", async ({ page }) => {
 //   const homePage = new HomePage(page);
