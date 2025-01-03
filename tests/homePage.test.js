@@ -318,7 +318,7 @@ test("Frequently Asked Questions drobdowns works", async ({ page }) => {
   await page.getByText('An MSSP helps businesses with').click();
 });
 
-test.only("PARTNERSHIP & COLLABORATION links", async ({ page }) => {
+test("PARTNERSHIP & COLLABORATION links", async ({ page }) => {
   const homePage = new HomePage(page);
 
   // await page.getByLabel('1 of').click();
