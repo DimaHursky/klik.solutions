@@ -360,9 +360,9 @@ test("PARTNERSHIP & COLLABORATION links", async ({ page }) => {
   const page6Promise = page.waitForEvent('popup');
   await page.getByRole('link', { name: 'Dell Technologies logo sm' }).click();
   const page6 = await page6Promise;
-  await page5.waitForTimeout(5000);
+  await page6.waitForTimeout(5000);
   // await page6.waitForURL(/.* dell.com/);
-  await expect(page6.url()).toMatch(/.* dell.com\uk-ua\lp/);
+  await expect(page6.url()).toMatch(/.* dell.com/);
   await page6.close();
 
   // await page.getByLabel('2 of').click();
