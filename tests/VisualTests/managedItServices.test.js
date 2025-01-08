@@ -10,21 +10,6 @@ test.beforeEach(async ({ page }) => {
   await page.goto("https://klik.solutions/");
 });
 
-//ManagedItServices
-
-test('ManagedItServices', async ({ page }) => {
-  const homePage = new HomePage(page);
-
-  // Locate the text element
-  await homePage.clickManagedItServices();
-
-  // Take a screenshot and save it to a specific path
-  // await page.screenshot({ path: 'tests/managedItServices/Expertise-drop-down-1-chromium-win32.png' });
-
-  // Take a screenshot and compare it to the baseline snapshot
-  await expect(page).toHaveScreenshot(); 
-});
-
 test('How do we manage?', async ({ page }) => {
     const homePage = new HomePage(page);
 
@@ -88,7 +73,7 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
     await expect(page).toHaveScreenshot(); 
   });
 
-    test.only('Get started', async ({ page }) => {
+    test('Get started', async ({ page }) => {
       const homePage = new HomePage(page);
   
       await homePage.clickManagedItServices();
