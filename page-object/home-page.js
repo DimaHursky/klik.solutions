@@ -119,14 +119,10 @@ exports.HomePage = class HomePage {
     this.cybersecurityLink = page
       .locator("#container")
       .getByRole("link", { name: "Cybersecurity" });
-    this.cloudExpertsLink = page.getByRole("link", {
-      name: "Cloud experts",
-      exact: true,
-    });
-    this.dataAnalyticsLink = page.getByRole("link", {
-      name: "Data analytics",
-      exact: true,
-    });
+    this.cloudExpertsLink = page.getByRole('link', { name: 'Cloud Experts Leverage the' })
+
+    this.dataAnalyticsLink = page.getByRole('link', { name: 'Data Services Unleash the' });
+
 
     // Locators for "Learn more" links
     this.learnMoreLinks = page.getByRole("link", { name: "Learn more" });
