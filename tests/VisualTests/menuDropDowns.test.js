@@ -27,6 +27,7 @@ test('Locations drop-down', async ({ page }) => {
   const homePage = new HomePage(page);
 
   await homePage.hoverOverLocations();
+  
   await expect(page).toHaveScreenshot(); 
 });
 
