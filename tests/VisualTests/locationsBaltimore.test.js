@@ -57,7 +57,7 @@ test('How We can Help', async ({ page }) => {
     await page.getByRole('heading', { name: 'How We can Help' }).click();
 
 
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(500);
 
     await expect(page).toHaveScreenshot(); 
 });
