@@ -74,14 +74,15 @@ test('Our awards and recognitions', async ({ page }) => {
     await expect(page).toHaveScreenshot(); 
 });
 
-// test('Other Klik Solutions Locations', async ({ page }) => {
-//     const homePage = new HomePage(page);
+test('Other Klik Solutions Locations', async ({ page }) => {
+    const homePage = new HomePage(page);
 
-//     await homePage.hoverOverLocations();
-//     await page.getByRole('link', { name: 'Baltimore, Maryland Baltimore' }).click();
-//     await page.getByRole('heading', { name: 'Other Klik Solutions Locations' }).hover();
+    await homePage.hoverOverLocations();
+    await page.getByRole('link', { name: 'Baltimore, Maryland Baltimore' }).click();
+    await page.waitForTimeout(50);
+    await page.getByRole('heading', { name: 'Other Klik Solutions Locations' }).hover();
 
-//     await page.waitForTimeout(5000);
+    await page.waitForTimeout(5000);
 
-//     await expect(page).toHaveScreenshot(); 
-// });
+    await expect(page).toHaveScreenshot(); 
+});
