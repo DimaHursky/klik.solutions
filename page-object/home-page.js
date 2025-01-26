@@ -51,7 +51,7 @@ exports.HomePage = class HomePage {
       name: "Nonprofits Increase",
     });
     this.supplyChainLink = page.getByRole("link", {
-      name: "Supply Chain Industry Klik",
+      name: "Supply Chain Industry Get the",
     });
     this.constructionLink = page.getByRole("link", {
       name: "Construction Enhance project",
@@ -113,9 +113,8 @@ exports.HomePage = class HomePage {
       .locator("#stickyBlock")
       .getByRole("link", { name: "Get started" });
     // Locators for the links "Managed IT Services", "Cloud experts", "Data analytics", Cybersecurity
-    this.managedItServicesLink = page.getByRole("link", {
-      name: "Managed IT Services",
-    });
+    this.managedItServicesLink = page.getByRole('link', { name: 'Managed IT Services', exact: true });
+
     this.cybersecurityLink = page
       .locator("#container")
       .getByRole("link", { name: "Cybersecurity" });
