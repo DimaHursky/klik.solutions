@@ -11,11 +11,11 @@ test.beforeEach(async ({ page }) => {
 });
 
 
-test('Legal page', async ({ page }) => {
+test('Construction', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.hoverOverIndustries();
-    await homePage.legalLink.click();
+    await homePage.constructionLink.click();
 
     await page.waitForTimeout(5000);
 
@@ -26,40 +26,53 @@ test('Check Out Real Results', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.hoverOverIndustries();
-    await homePage.healthcareLink.click();
+    await homePage.constructionLink.click();
 
     await page.waitForTimeout(5000);
+    await page.getByRole('heading', { name: 'Check Out Real Results and' }).click();
 
-    await page.getByRole('heading', { name: 'Check Out Real Results and' }).click();    
-    await page.waitForTimeout(5000);
-
-    await expect(page).toHaveScreenshot(); 
-});
-
-
-test('BENEFITS', async ({ page }) => {
-    const homePage = new HomePage(page);
-
-    await homePage.hoverOverIndustries();
-    await homePage.healthcareLink.click();
-
-    await page.waitForTimeout(5000);
-
-    await page.getByText('BENEFITS', { exact: true }).click();
     await page.waitForTimeout(5000);
 
     await expect(page).toHaveScreenshot(); 
 });
 
-test('Looking for support?', async ({ page }) => {
+test('Read more', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.hoverOverIndustries();
-    await homePage.healthcareLink.click();
+    await homePage.constructionLink.click();
+
+    await page.waitForTimeout(5000);
+    await page.getByText('Read more').hover();
 
     await page.waitForTimeout(5000);
 
-    await page.getByText('Looking for support?').click();
+    await expect(page).toHaveScreenshot(); 
+});
+
+test('Klik for Support', async ({ page }) => {
+    const homePage = new HomePage(page);
+
+    await homePage.hoverOverIndustries();
+    await homePage.constructionLink.click();
+
+    await page.waitForTimeout(5000);
+    await page.getByRole('link', { name: 'Klik for Support' }).first().hover();
+
+    await page.waitForTimeout(5000);
+
+    await expect(page).toHaveScreenshot(); 
+});
+
+test('KLIK', async ({ page }) => {
+    const homePage = new HomePage(page);
+
+    await homePage.hoverOverIndustries();
+    await homePage.constructionLink.click();
+
+    await page.waitForTimeout(5000);
+    await page.getByText('KLIK', { exact: true }).click();
+
     await page.waitForTimeout(5000);
 
     await expect(page).toHaveScreenshot(); 
@@ -69,12 +82,11 @@ test('Learn more', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.hoverOverIndustries();
-    await homePage.healthcareLink.click();
+    await homePage.constructionLink.click();
 
     await page.waitForTimeout(5000);
+    await page.getByText('Learn more').nth(1).hover();
 
-
-    await page.getByText('Learn more', { exact: true }).hover();
     await page.waitForTimeout(5000);
 
     await expect(page).toHaveScreenshot(); 

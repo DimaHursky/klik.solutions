@@ -8,13 +8,16 @@ test.use({
 
 test.beforeEach(async ({ page }) => {
   await page.goto("https://klik.solutions/");
+  await page.waitForTimeout(2000);
 });
 
 test('How do we manage?', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.clickManagedItServices();
+    await page.waitForTimeout(5000);
     await page.getByRole('heading', { name: 'How do we manage?' }).hover();
+    await page.waitForTimeout(5000);
 
     await expect(page).toHaveScreenshot(); 
 });
@@ -23,7 +26,9 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.clickManagedItServices();
+    await page.waitForTimeout(5000);
     await page.getByRole('link', { name: 'Visit Klik CORE Plus Package' }).hover();
+    await page.waitForTimeout(5000);
   
     await expect(page).toHaveScreenshot(); 
   });
@@ -41,6 +46,7 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.clickManagedItServices();
+    
     await page.getByRole('button', { name: 'Show more services' }).hover();
 
     await expect(page).toHaveScreenshot(); 
@@ -50,7 +56,10 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.clickManagedItServices();
-    await page.getByRole('heading', { name: 'What are your pain points? Contact us and we will solve them within 90 days!' }).hover();
+    await page.waitForTimeout(5000);
+    await page.getByRole('heading', { name: 'What Are Your Pain Points?', exact: true }).hover();
+
+    await page.waitForTimeout(5000);
 
     await expect(page).toHaveScreenshot(); 
   });
