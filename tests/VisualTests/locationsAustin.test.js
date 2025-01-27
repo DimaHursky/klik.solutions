@@ -27,6 +27,7 @@ test('Check Out Real Results and', async ({ page }) => {
 
     await homePage.hoverOverLocations();
     await page.getByRole('link', { name: 'Austin, Texas' }).click();
+    await page.waitForTimeout(500);
     await page.getByRole('heading', { name: 'Check Out Real Results and' }).click();
 
     await page.waitForTimeout(5000);
@@ -38,11 +39,10 @@ test('Other Klik Solutions Locations', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.hoverOverLocations();
-    await page.getByRole('link', { name: 'Austin, Texas' }).click();
-    await page.getByRole('heading', { name: 'Baltimore IT Support' }).click();
-
-
     await page.waitForTimeout(5000);
+    await page.getByRole('link', { name: 'Austin, Texas' }).click();
+    await page.waitForTimeout(5000);
+    await page.getByText('Baltimore IT Support Learn').hover();
 
     await expect(page).toHaveScreenshot(); 
 });

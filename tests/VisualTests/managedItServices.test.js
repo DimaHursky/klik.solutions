@@ -37,7 +37,9 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.clickManagedItServices();
+    await page.waitForTimeout(5000);
     await page.getByRole('heading', { name: 'Check Out Real Results and' }).hover();
+    await page.waitForTimeout(5000);
   
     await expect(page).toHaveScreenshot(); 
   });
@@ -46,8 +48,10 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.clickManagedItServices();
+    await page.waitForTimeout(5000);
     
     await page.getByRole('button', { name: 'Show more services' }).hover();
+    await page.waitForTimeout(5000);
 
     await expect(page).toHaveScreenshot(); 
   });
@@ -68,7 +72,9 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.clickManagedItServices();
+    await page.waitForTimeout(5000);
     await page.getByText('Looking for support?').hover();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
   });
@@ -77,7 +83,9 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.clickManagedItServices();
+    await page.waitForTimeout(5000);
     await page.getByRole('link', { name: 'More Case Studies' }).hover();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
   });
@@ -86,7 +94,9 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
       const homePage = new HomePage(page);
   
       await homePage.clickManagedItServices();
+      await page.waitForTimeout(5000);
       await page.getByRole('link', { name: 'Get started' }).hover();
+      await page.waitForTimeout(5000);
 
       await expect(page).toHaveScreenshot(); 
     });
@@ -95,7 +105,9 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
       const homePage = new HomePage(page);
   
       await homePage.clickManagedItServices();
+      await page.waitForTimeout(5000);
       await page.getByRole('heading', { name: 'Arthur Olshansky Talks About' }).hover();
+      await page.waitForTimeout(5000);
             
       await expect(page).toHaveScreenshot(); 
     });
@@ -104,7 +116,9 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
       const homePage = new HomePage(page);
   
       await homePage.clickManagedItServices();
+      await page.waitForTimeout(5000);
       await page.getByRole('heading', { name: 'Subscribe to Our Monthly' }).click();
+      await page.waitForTimeout(5000);
             
       await expect(page).toHaveScreenshot(); 
     });
@@ -113,7 +127,9 @@ test('Visit Klik CORE Plus Package', async ({ page }) => {
       const homePage = new HomePage(page);
   
       await homePage.clickManagedItServices();
+      await page.waitForTimeout(5000);
       await page.getByRole('heading', { name: 'Frequently Asked Questions' }).click();
+      await page.waitForTimeout(5000);
             
       await expect(page).toHaveScreenshot(); 
     });

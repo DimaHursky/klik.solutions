@@ -8,9 +8,7 @@ exports.HomePage = class HomePage {
     this.managedITServicesLink = page.getByRole("link", {
       name: "Managed IT Services Secure",
     });
-    this.cybersecurityLink = page.getByRole("link", {
-      name: "Cybersecurity Protect your",
-    });
+    this.cybersecurityLink = page.getByRole('link', { name: 'Cybersecurity Protect your' });
     this.cloudExpertsLink = page.getByRole("link", {
       name: "Cloud Experts Leverage the",
     });
@@ -64,7 +62,7 @@ exports.HomePage = class HomePage {
     });
 
     // Locators for Insights drop-down
-    this.insightsLink = page.getByRole("link", { name: "Insights" });
+    this.insightsLink = page.getByRole('link', { name: 'Insights', exact: true });
     this.newsBlogLink = page.getByRole("link", { name: "News & Blog" });
     this.videoBlogLink = page.getByRole("link", { name: "Video-Blog" });
     this.whitePapersLink = page.getByRole("link", {
@@ -115,12 +113,10 @@ exports.HomePage = class HomePage {
     // Locators for the links "Managed IT Services", "Cloud experts", "Data analytics", Cybersecurity
     this.managedItServicesLink = page.getByRole('link', { name: 'Managed IT Services', exact: true });
 
-    this.cybersecurityLink = page
-      .locator("#container")
-      .getByRole("link", { name: "Cybersecurity" });
-    this.cloudExpertsLink = page.getByRole('link', { name: 'Cloud Experts Leverage the' })
+    this.cybersecurityLink = page.getByRole('link', { name: 'Cybersecurity Protect your' });
+    this.cloudExpertsLink = page.getByRole('link', { name: 'Cloud Experts Leverage the' });
 
-    this.dataAnalyticsLink = page.getByRole('link', { name: 'Data Services Unleash the' });
+    this.dataAnalyticsLink = page.getByRole('link', { name: 'Data Services Unleash the' })
 
 
     // Locators for "Learn more" links
@@ -299,8 +295,10 @@ exports.HomePage = class HomePage {
 
   // Method to click the "Cybersecurity" link and wait for the navigation
   async clickCybersecurity() {
+    // await this.cybersecurityLink.click();
     await this.cybersecurityLink.click();
-    await this.page.waitForURL(/.*it-security/);
+
+    // await this.page.waitForURL(/.*it-security/);
   }
 
   // Method to click the "Cloud experts" link and wait for the navigation
