@@ -78,9 +78,10 @@ test('Other Klik Solutions Locations', async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.hoverOverLocations();
+    await page.waitForTimeout(500);
     await page.getByRole('link', { name: 'Baltimore, Maryland Baltimore' }).click();
-    await page.waitForTimeout(50);
-    await page.getByRole('heading', { name: 'Other Klik Solutions Locations' }).hover();
+    await page.waitForTimeout(500);
+    await page.getByText('Austin IT Support Learn more').hover();
 
     await page.waitForTimeout(5000);
 

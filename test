@@ -1,0 +1,9 @@
+await page.getByRole('link', { name: 'Cybersecurity Protect your' }).click({
+    button: 'right'
+  });
+  await page.getByRole('link', { name: 'Data Services Unleash the' }).click({
+    button: 'right'
+  });
+  await .click({
+    button: 'right'
+  });

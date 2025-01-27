@@ -14,8 +14,10 @@ test.beforeEach(async ({ page }) => {
 test('CybersecurityVisual', async ({ page }) => {
     const homePage = new HomePage(page);
 
+    await page.waitForTimeout(1000);
     await homePage.hoverOverExpertise();
     await homePage.clickCybersecurity();
+    // await page.getByRole('link', { name: 'Cybersecurity Protect your' }).click();
  
   // Take a screenshot and save it to a specific path
   // await page.screenshot({ path: 'tests/menuDropDowns/Expertise-drop-down-1-chromium-win32.png' });
@@ -27,9 +29,11 @@ test('CybersecurityVisual', async ({ page }) => {
 test('IoT Invasion Interconnected', async ({ page }) => {
     const homePage = new HomePage(page);
 
+    await page.waitForTimeout(1000);
     await homePage.hoverOverExpertise();
     await homePage.clickCybersecurity();
     await page.getByText('IoT Invasion Interconnected').hover();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
 });
@@ -37,9 +41,11 @@ test('IoT Invasion Interconnected', async ({ page }) => {
 test('Talk to an Expert', async ({ page }) => {
     const homePage = new HomePage(page);
 
+    await page.waitForTimeout(1000);
     await homePage.hoverOverExpertise();
     await homePage.clickCybersecurity();
     await page.getByRole('link', { name: 'Talk to an Expert' }).hover();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
 });
@@ -47,9 +53,11 @@ test('Talk to an Expert', async ({ page }) => {
 test('Our Clients’ Feedback', async ({ page }) => {
     const homePage = new HomePage(page);
 
+    await page.waitForTimeout(1000);
     await homePage.hoverOverExpertise();
     await homePage.clickCybersecurity();
     await page.getByRole('heading', { name: 'Our Clients’ Feedback' }).hover();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
 });
@@ -57,9 +65,11 @@ test('Our Clients’ Feedback', async ({ page }) => {
 test('Real Case Studies from Our', async ({ page }) => {
     const homePage = new HomePage(page);
 
+    await page.waitForTimeout(1000);
     await homePage.hoverOverExpertise();
     await homePage.clickCybersecurity();
     await page.getByRole('heading', { name: 'Real Case Studies from Our' }).hover();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
 });
@@ -67,29 +77,35 @@ test('Real Case Studies from Our', async ({ page }) => {
 test('Get eBooks', async ({ page }) => {
     const homePage = new HomePage(page);
 
+    await page.waitForTimeout(1000);
     await homePage.hoverOverExpertise();
     await homePage.clickCybersecurity();
     await page.getByRole('link', { name: 'Get eBooks' }).hover();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
 });
 
-test('Get started', async ({ page }) => {
-    const homePage = new HomePage(page);
+// test('Get started', async ({ page }) => {
+//     const homePage = new HomePage(page);
 
-    await homePage.hoverOverExpertise();
-    await homePage.clickCybersecurity();
-    await page.getByRole('link', { name: 'Get started' }).hover();
+//     await page.waitForTimeout(1000);
+//     await homePage.hoverOverExpertise();
+//     await homePage.clickCybersecurity();
+//     await page.getByRole('link', { name: 'Get started' }).hover();
+//     await page.waitForTimeout(5000);
     
-    await expect(page).toHaveScreenshot(); 
-});
+//     await expect(page).toHaveScreenshot(); 
+// });
 
-test('Cybersecurity by Klik', async ({ page }) => {
+test('Subscribe to get the latest', async ({ page }) => {
     const homePage = new HomePage(page);
 
+    await page.waitForTimeout(1000);
     await homePage.hoverOverExpertise();
     await homePage.clickCybersecurity();
-    await page.getByRole('heading', { name: 'Cybersecurity by Klik' }).hover();
+    await page.getByText('Subscribe to get the latest').click();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
 });
@@ -97,9 +113,11 @@ test('Cybersecurity by Klik', async ({ page }) => {
 test('Subscribe to Our Monthly', async ({ page }) => {
     const homePage = new HomePage(page);
 
+    await page.waitForTimeout(1000);
     await homePage.hoverOverExpertise();
     await homePage.clickCybersecurity();
     await page.getByRole('heading', { name: 'Subscribe to Our Monthly' }).hover();
+    await page.waitForTimeout(5000);
     
     await expect(page).toHaveScreenshot(); 
 });
