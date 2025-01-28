@@ -54,17 +54,16 @@ exports.HomePage = class HomePage {
     this.constructionLink = page.getByRole("link", {
       name: "Construction Enhance project",
     });
-    this.transportationLink = page.getByRole("link", {
+    this.transportationAndLogisticsLink = page.getByRole("link", {
       name: "Transportation and Logistics",
     });
-    this.dentalPracticeLink = page.getByRole("link", {
-      name: "Dental Practice Where",
-    });
+    this.dentalPracticeLink = page.getByRole('link', { name: 'Dental Practice  Discover' });
+
 
     // Locators for Insights drop-down
     this.insightsLink = page.getByRole('link', { name: 'Insights', exact: true });
-    this.newsBlogLink = page.getByRole("link", { name: "News & Blog" });
-    this.videoBlogLink = page.getByRole("link", { name: "Video-Blog" });
+    this.newsBlogLink = page.getByRole('link', { name: 'News and Blog Explore' });
+    this.videoBlogLink = page.getByRole("link", { name: "Video-Blog Learn about the" });
     this.whitePapersLink = page.getByRole("link", {
       name: "White Papers & Ebooks",
     });
@@ -129,9 +128,8 @@ exports.HomePage = class HomePage {
 
     // Locators for industry items
     this.nonprofitsText = page.getByText("Nonprofits", { exact: true });
-    this.transportationText = page.getByText("Transportation and logistics", {
-      exact: true,
-    });
+    this.transportationText = page.getByText('Transportation and Logistics', { exact: true });
+
     this.realEstateText = page.getByText(
       "Real Estate and Property Management",
       { exact: true }
@@ -143,9 +141,6 @@ exports.HomePage = class HomePage {
       exact: true,
     });
     this.nonprofitsText = page.getByText("Nonprofits", { exact: true });
-    this.transportationText = page.getByText("Transportation and logistics", {
-      exact: true,
-    });
     this.realEstateText = page.getByText(
       "Real Estate and Property Management",
       { exact: true }
@@ -164,7 +159,7 @@ exports.HomePage = class HomePage {
 
     // Locator for the "Klik to support" link
     this.klikToSupportLink = page.getByRole("link", {
-      name: "Klik to support",
+      name: "Klik for Support",
     });
 
     // Locators for the service cards and extra text Services We Provide
@@ -183,7 +178,8 @@ exports.HomePage = class HomePage {
       "Klik Solutions’ cloud services provide scalable, flexible solutions for seamless migration, management, and optimization, ensuring secure and accessible data, enhancing collaboration, and improving efficiency to support your business’s growth"
     );
 
-    this.dataAnalyticsCard = page.getByText("Data AnalyticsKlik Analytics");
+    this.dataAnalyticsCard = page.getByRole('link', { name: 'Data Services Data Services' })
+
     this.dataAnalyticsText = page.getByText(
       "Klik Analytics transforms your business with data, AI, and automation, providing tailored solutions for actionable insights, strategic decision-making, and optimized operations to give you a competitive edge."
     );
@@ -228,7 +224,7 @@ exports.HomePage = class HomePage {
     await expect(this.nonprofitsLink).toBeVisible();
     await expect(this.supplyChainLink).toBeVisible();
     await expect(this.constructionLink).toBeVisible();
-    await expect(this.transportationLink).toBeVisible();
+    await expect(this.transportationAndLogisticsLink).toBeVisible();
     await expect(this.dentalPracticeLink).toBeVisible();
   }
 
