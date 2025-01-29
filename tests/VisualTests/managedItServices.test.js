@@ -7,7 +7,7 @@ test.use({
 });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("https://klik.solutions/");
+  await page.goto("");
   await page.waitForTimeout(2000);
 });
 

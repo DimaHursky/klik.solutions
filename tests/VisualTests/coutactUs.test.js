@@ -7,14 +7,18 @@ test.use({
 });
 
 test.beforeEach(async ({ page }) => {
+    await page.waitForTimeout(500);
   await page.goto("");
+  await page.waitForTimeout(5000);
 });
 
-test('Cloud ExpertsVisual', async ({ page }) => {
+
+test('Coutact Us', async ({ page }) => {
     const homePage = new HomePage(page);
 
-    await homePage.hoverOverExpertise();
-    await homePage.clickDataAnalytics();
-    
+    await homePage.contactUsLink.click();
+
+    await page.waitForTimeout(5000);
+
     await expect(page).toHaveScreenshot(); 
 });
