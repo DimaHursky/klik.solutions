@@ -7,8 +7,9 @@ test.use({
 });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("https://klik.solutions/");
+  await page.goto("");
   // await page.goto("https://staging.klik.solutions/");
+  await page.waitForTimeout(2000);
 });
 
 test("menu drop-down modal", async ({ page }) => {
@@ -78,19 +79,31 @@ test("verify Managed IT Services, Cloud experts, Data analytics, Cybersecurity l
 
   // Verify "Managed IT Services" link
   await homePage.clickManagedItServices();
+  await page.waitForTimeout(1500);
   await homePage.goBackToHome();
+  await page.waitForTimeout(1500);
 
   // Verify "Cybersecurity" link
-  await homePage.clickCybersecurity();
+  await page.locator('#container').getByRole('link', { name: 'Cybersecurity', exact: true }).click();
+  await page.waitForTimeout(1500);
   await homePage.goBackToHome();
+  await page.waitForTimeout(1500);
+
 
   // Verify "Cloud experts" link
-  await homePage.clickCloudExperts();
+  // await homePage.clickCloudExperts();
+  await page.locator('#container').getByRole('link', { name: 'Cloud Experts', exact: true }).click();
+  await page.waitForTimeout(1500);
   await homePage.goBackToHome();
+  await page.waitForTimeout(1500);
+
 
   // Verify "Data analytics" link
-  await homePage.clickDataAnalytics();
+  await page.getByRole('link', { name: 'Data Services', exact: true }).click();
+  await page.waitForTimeout(1500);
   await homePage.goBackToHome();
+  await page.waitForTimeout(1500);
+
 });
 
 test("verify industries link", async ({ page }) => {
@@ -115,12 +128,15 @@ test("verify Show more industries drop-down", async ({ page }) => {
 
 test("verify Looking for support?, Klik to support link", async ({ page }) => {
   const homePage = new HomePage(page);
-
+ 
   // Click on the "Klik to support" link and verify navigation
   await homePage.clickSupportLink();
-
+  // const page1 = await page.context().waitForEvent("page"); 
   // Verify the URL
   await expect(page.url()).toMatch(/.*contact-us/);
+
+  // await page.getByRole('link', { name: 'Klik for Support' }).click();
+  // const page1 = await context.newPage();
 });
 
 // Services We Provide
@@ -362,7 +378,8 @@ test("PARTNERSHIP & COLLABORATION links", async ({ page }) => {
   const page6 = await page6Promise;
   await page6.waitForTimeout(5000);
   // await page6.waitForURL(/.* dell.com/);
-  await expect(page6.url()).toMatch(/.* dell.com/);
+  await expect(page6.url()).toMatch("https://www.dell.com/uk-ua/lp");
+  // await expect(page6.url()).toMatch(/.* dell.com/);
   await page6.close();
 
   // await page.getByLabel('2 of').click();
