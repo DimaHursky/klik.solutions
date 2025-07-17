@@ -12,9 +12,10 @@ test.beforeEach(async ({ page }) => {
 test('Home page', async ({ page }) => {
   
   // Take a screenshot and save it to a specific path
-  await page.screenshot({ path: 'tests/VisualTests/HomeVisual.test.js-snapshots/Home-page-1-chromium-win32.png' });
+  // await page.screenshot({ path: 'tests/VisualTests/HomeVisual.test.js-snapshots/Home-page-1-chromium-win32.png' });
   
   // Take a screenshot and compare it to the baseline snapshot
+  await page.waitForTimeout(3500);
   await expect(page).toHaveScreenshot(); 
 });
 
@@ -24,7 +25,7 @@ test('Our awards', async ({ page }) => {
   await   await page.getByRole('heading', { name: 'Our awards and recognitions:' }).click();
 
   // Take a screenshot and save it to a specific path
-  await page.screenshot({ path: 'tests/VisualTests/HomeVisual.test.js-snapshots/Our-awards-1-chromium-win32.png' });
+  // await page.screenshot({ path: 'tests/VisualTests/HomeVisual.test.js-snapshots/Our-awards-1-chromium-win32.png' });
 
   // Take a screenshot and compare it to the baseline snapshot
   await expect(page).toHaveScreenshot(); 
